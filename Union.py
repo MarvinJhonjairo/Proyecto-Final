@@ -38,7 +38,8 @@ y = tweepy.API(auth)
 z=0 #contador para alarma
 num=1 #contador para alarma
 
-
+# Se inicializan los valores de nuestro grafo, se definen los valores iniciales y también las relaciones que tenemos
+# entre las alarmas y nuestro grafo (casa)
 archivo.write("CREATE (casa:Customer {id: 'Casa',name: 'Casa'})"+"\n")
 archivo.write("CREATE (alarma1:Tipo {id: 'A1', date: 20130928})"+"\n")
 archivo.write("CREATE (alarma1)-[:NEXT]->(alarma2:Tipo {id: 'A2', date: 20140129})"+"\n")
@@ -49,14 +50,16 @@ archivo.write("CREATE (casa)-[:SAVED]->(alarma3)"+"\n")
 
 while True:#ciclo infinito
     for tweets in x.user_timeline(count=1): #nos permite leer solo el ultimo tweet
-				now = datetime.datetime.now()
-				valor = str(now)
-				rpta = str(num)
+		now = datetime.datetime.now()
+# Se hace este casteamiento para poder escribir en el archivo de texto
+		valor = str(now)
+		rpta = str(num)
                 comando = tweets.text	
 #----------------------------------------------------------alarma			
                 if (GPIO.input(10) ):
                     print "Alarma activada"
                     z=z+1
+# Se llama el método write utilizado para escribir en el archivo de texto el nodo y los valores que se activaron para la alarma global
 					archivo.write("CREATE (Activada"+rpta+":Alerta {id: 'Activada"+rpta+"',name: '"valor"'})"+"\n")
 					archivo.write("CREATE (Activada"+rpta+")-[:SAVED{hora:['Hora']}]->(alarma1)"+"\n")
 					num = num +1
@@ -69,6 +72,7 @@ while True:#ciclo infinito
 				if comando in "Encender luz 1": #Enciende el led 1, si lee un tweet con (Encender luz 1)
                                 print("led 1 prendido")
                                 GPIO.output(22,GPIO.HIGH)
+# Se escribe en el archivo de texto el siguiente nodo con la hora y fecha de la activación del cuarto uno
 								archivo.write("CREATE (Activada"+rpta+":Alerta {id: 'Activada"+rpta+"',name: '"valor"'})"+"\n")
 								archivo.write("CREATE (Activada"+rpta+")-[:SAVED{hora:['Hora']}]->(alarma2)"+"\n")
 								num = num +1
@@ -83,6 +87,7 @@ while True:#ciclo infinito
                         if comando in "Encender luz 2": #prende led 2 
                                 print("led 2 prendido")
                                 GPIO.output(11,GPIO.HIGH)
+# Se escribe en el archivo de texto el siguiente nodo con la hora y fecha de la activación del cuarto dos
 								archivo.write("CREATE (Activada"+rpta+":Alerta {id: 'Activada"+rpta+"',name: '"valor"'})"+"\n")
 								archivo.write("CREATE (Activada"+rpta+")-[:SAVED{hora:['Hora']}]->(alarma3)"+"\n")
 								num = num +1
@@ -99,6 +104,7 @@ while True:#ciclo infinito
                                 GPIO.output(8,GPIO.HIGH)
                                 time.sleep(6)
                                 GPIO.output(8,GPIO.LOW)# Detiene la apertura del porton
+# Se escribe en el archivo de texto el siguiente nodo con la hora y fecha en que se abre el porton para su control
 								archivo.write("CREATE (Activada"+rpta+":Alerta {id: 'Activada"+rpta+"',name: '"valor"'})"+"\n")
 								archivo.write("CREATE (Activada"+rpta+")-[:SAVED{hora:['Hora']}]->(alarma4)"+"\n")
 								num = num +1
