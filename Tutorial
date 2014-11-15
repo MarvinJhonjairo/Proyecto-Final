@@ -1,0 +1,37 @@
+Instalacion de NEO4J Community
+
+  Ir a http://neo4j.com/download/
+  Descargar la version que se adapte al ordenador.
+  Correr el instalador descargado.
+  Seguir el proceso de instalacion.
+  La carpeta contiene:
+    bin: contiene todo para iniciar el servidor y herramientas complementarias.
+    conf: Configuracion del servidor.
+    data: Directorio deonde se almacenan los datos.
+    doc: Material de apoyo, incluyendo el manual de Neo4j.
+    examples: ejemplos de como relacionarlo con Java.
+    lib: todos los archivos jar necesarios para empotrar Neo4j.
+    plugins: nuevas funciones a la base de datos
+  
+  
+  APLICAION EN CONSOLA
+  Descargar la version de NEO4J que se desee.
+  Descomprimir el archivo .rar
+  Ir a la carpeta NEO4J_HOME.
+  Ejecutar %NEO4J_HOME%\bin\Neo4j.bat
+  Detener la consola con Ctrl+C.
+  
+  WINDOWS COMO UN SERVIDOR
+  Descargar la version de NEO4J que se desee.
+  Extraer el contenido del archivo .rar
+  Ir a la carpeta NEO4J_HOME.
+  CORRER COMO ADMINISTRADOR
+  Ir a Inicio\Todos los programas\Accesorios
+  Correr "Simbolo del Sistema" como Administrador
+  En %NEO4J_HOME% correr bin\Neo4jInstaller.bat install
+  
+  REFERENCIAS
+  INSTALAR:  http://neo4j.com/docs/stable/server-installation.html
+  COMO USARLO:  http://neo4j.com/docs/stable/tutorials.html
+  JAVA:  http://neo4j.com/docs/stable/tutorials-java-embedded.html
+  
